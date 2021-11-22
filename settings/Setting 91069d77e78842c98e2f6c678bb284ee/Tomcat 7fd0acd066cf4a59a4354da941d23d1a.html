@@ -1,0 +1,660 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tomcat</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7fd0acd0-66cf-4a59-a435-4da941d23d1a" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://super.so/icon/light/server.svg"/></div><h1 class="page-title">Tomcat</h1></header><div class="page-body"><div id="ef600b18-270a-440d-a263-6b0b463e4f48" class="column-list"><div id="6c06a6bf-88bc-4e14-91fe-86b5762ba451" style="width:50%" class="column"><figure id="4eff77a8-9262-4360-93ec-4e33226456c4" class="image"><a href="Tomcat%207fd0acd066cf4a59a4354da941d23d1a/Untitled.png"><img style="width:672px" src="Tomcat%207fd0acd066cf4a59a4354da941d23d1a/Untitled.png"/></a></figure></div><div id="b8c72994-04e8-4011-b535-d1e8977fd845" style="width:50%" class="column"><figure id="be0fb010-853e-45e1-b819-04a8ae96191b"><a href="https://tomcat.apache.org/download-10.cgi" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Apache Tomcat®</div><div class="bookmark-description">Welcome to the Apache Tomcat ® 10.x software download page. This page provides download links for obtaining the latest version of Tomcat 10.0.x software, as well as links to the archives of older releases. Unsure which version you need? Specification versions implemented, minimum Java version required and lots more useful information may be found on the &#x27; which version?&#x27;</div></div><div class="bookmark-href"><img src="https://tomcat.apache.org/favicon.ico" class="icon bookmark-icon"/>https://tomcat.apache.org/download-10.cgi</div></div><img src="https://www.apache.org/images/SupportApache-small.png" class="bookmark-image"/></a><figcaption>tomcat download address</figcaption></figure><p id="040e8c77-09c8-4bc8-af91-2ef1f356f548" class=""><a href="https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.13/bin/apache-tomcat-10.0.13-windows-x64.zip">64-bit Windows zip</a> (<a href="https://downloads.apache.org/tomcat/tomcat-10/v10.0.13/bin/apache-tomcat-10.0.13-windows-x64.zip.asc">pgp</a>, <a href="https://downloads.apache.org/tomcat/tomcat-10/v10.0.13/bin/apache-tomcat-10.0.13-windows-x64.zip.sha512">sha512</a>) 설치</p><p id="f299a67c-b200-4d69-be12-ba83bb716183" class="">환경설정<div class="indented"><p id="8a48f6a0-e7e1-4781-ae09-baf6ad66b934" class="">window → preference → server → runtime enviroment → add → tomcat10</p></div></p><ul id="22ac6391-6416-4cd9-aa1c-850c226993f9" class="toggle"><li><details open=""><summary>tomcat설치 경로를 이클립스에 알려 이클립스에서 이를 껐다 켰다 할 수 있게 하는 것</summary><ol type="1" id="aed2f78b-471c-4894-b60b-a6b182b01a2b" class="numbered-list" start="1"><li>Open perspective에서 java EE → servers 에 Tomcat 10을 입력해 웹 서버를 구성</li></ol><ol type="1" id="7d7a6cca-a03b-4ebe-9437-da9a2c0ba725" class="numbered-list" start="2"><li>admin port에 Port Number값을 입력</li></ol><ol type="1" id="934782a5-c2e8-4a15-9fe5-b8774f23cb5f" class="numbered-list" start="3"><li>저장 후 start 실행</li></ol><ol type="1" id="9da36543-1b79-468a-aed5-b91fcb623f17" class="numbered-list" start="4"><li>새로운 프로젝트 생성 → dynamic web project 실행</li></ol><ol type="1" id="499d4f1b-d2f6-442c-89b7-adc7f7d79af2" class="numbered-list" start="5"><li>target runtime이 tomcat이어야 한다.</li></ol><ol type="1" id="8fe7bbbd-fa8f-409d-b08f-30f449395a9b" class="numbered-list" start="6"><li>생성한 프로젝트에서 src/main/java 폴더가 소스 적는 곳</li></ol><ol type="1" id="301d278a-5940-4eb2-b646-7ac3d78a3a4a" class="numbered-list" start="7"><li>webapp에 → jsp → 파일 형성</li></ol></details></li></ul></div></div><p id="f2fc0679-89d0-41ef-b800-4e7bec5968ed" class="">
+</p><div id="06db36ee-7ff9-4118-a145-73d0c92aa085" class="column-list"><div id="1e5bbd8d-d812-4be9-88ca-92c2476fa0e3" style="width:50%" class="column"><figure id="b2150a00-ea0f-4440-93f0-adc4c6afdf70" class="image"><a href="Tomcat%207fd0acd066cf4a59a4354da941d23d1a/Untitled%201.png"><img style="width:1330px" src="Tomcat%207fd0acd066cf4a59a4354da941d23d1a/Untitled%201.png"/></a></figure></div><div id="90a9e2fd-83d2-41fc-b501-0b69aa558a14" style="width:50%" class="column"><ul id="bf502b7b-8351-4123-8fe4-a09d57336013" class="toggle"><li><details open=""><summary>배포할 프로젝트를 웹서버에 등록하기</summary><ol type="1" id="2f2dff57-f9ce-46a9-b1a3-15346d61449a" class="numbered-list" start="1"><li>server에서 오른쪽 버튼 누른뒤 add and remove실행</li></ol><ol type="1" id="5969b733-4711-4c1b-9694-8ce4706f97ab" class="numbered-list" start="2"><li>만든 프로젝트를 add하여 finish한다.</li></ol><ol type="1" id="5a2453c1-0716-49c8-bc32-d8d6aca807dc" class="numbered-list" start="3"><li>server의 Tomcat안에 해당 프로젝트가 있다.</li></ol><ol type="1" id="3f447c2b-4215-4f4a-8e60-b1bca3073f98" class="numbered-list" start="4"><li>브라우저에<p id="d3f7ae4b-fd4b-493d-b0da-0e2947751eeb" class="">http://localhost:8080<mark class="highlight-purple"><strong>/sample/home.jsp </strong></mark>← 파일 경로를 입력하면 프로젝트로 만든 웹 애플리케이션이 나온다.</p><p id="3aa090c0-8d63-4b4b-be98-aa9f00659c51" class="">
+</p><p id="c983ba51-be5b-4abe-8fbc-9acd4491e34d" class="">tomcat double click → module → path에 나오는 식별자 ex) <mark class="highlight-purple"><strong>/sample</strong></mark><div class="indented"><p id="63132061-2690-4b99-aeb0-12a7a39d6ac3" class="">웹서버에 배포된 웹 애플리케이션(프로젝트)의 식별자</p><p id="55da911c-e6a1-40bf-84f9-9b786aff3516" class="">http 프로토콜이 사용하는 웹서버의 기본 port번호 80</p></div></p></li></ol></details></li></ul></div></div><div id="9a4073e4-2ce9-4ad0-afb2-746996068d36" class="column-list"><div id="1ee977ce-0440-4fbd-b551-7f802a407d34" style="width:25%" class="column"><h3 id="714c154d-a679-405b-bd73-85c137e46a3c" class="">프로젝트 안의 폴더</h3></div><div id="63d9bac3-9494-414e-b6a4-b59ecd541405" style="width:75%" class="column"><p id="7f5501d5-8741-4e01-83b7-626f4bf7b8f3" class=""><mark class="highlight-purple"><strong>src/main/java</strong></mark><mark class="highlight-purple"> </mark> 자바 패키지, 클래스, 인터페이스 정의하는 곳</p><p id="bcd1aa3e-3e44-4d79-9e53-e961601743a8" class="">src/main/resources  자바 프로그램 실행에 필요한 환경 설정 파일을 정의하는 곳</p><p id="fabf0308-8126-43bd-8b5a-83763e640e51" class="">src/test/java  테스트 케이스를 정의하는 곳(src/main/java에서 정의한 프로그램을 테스트하는 프로그램 정의)</p><p id="88a4a9b6-f6e2-446f-b6e3-09a2ddeca4ad" class="">src/test/resources  테스트 케이스 실행에 필요한 환경 설정 파일을 정의하는 곳</p><p id="0e460b26-66d5-42f7-8467-a85ccd0edf52" class="">
+</p><p id="da1e11da-bd6e-4731-b6fe-350e5abc2eb4" class=""><mark class="highlight-purple"><strong>src/main/webapp</strong></mark><strong> </strong> 폴더, 이미지, CSS파일, JavaScript 파일, JSP파일을 정의하는 곳</p><ul id="ea9b554f-f2a2-413f-a7c9-1851690ca973" class="toggle"><li><details open=""><summary>외부에 접근이 차단된 폴더(숨겨진 폴더)</summary><p id="9a4b3334-97bc-444d-b6fd-85ea7bf1d515" class="">src/main/webapp/META-INF  웹 애플리케이션 실행에 필요한 부가 적인 설정 파일을 정의하는 곳</p><p id="38c0e0de-3176-4789-bde8-092c6b91e056" class="">src/main/webapp/WEB-INF  웹 애플리케이션 실행에 필요한 설정 파일을 정의하는 곳</p><p id="5fc2966d-2b84-4078-8ed0-9b6027a8cd68" class="">src/main/webapp/WEB-INF/lib  웹 애플리케이션 실행에 필요한 jar파일이 위치하는 곳 // <strong><mark class="highlight-purple">오라클 jdbc파일을 넣는 곳</mark></strong></p></details></li></ul></div></div><hr id="2239656b-ff84-456d-ae5e-abbd3efd5487"/><p id="65ff6f6c-b85d-476c-899f-1aeb5ce64e3e" class="">
+</p><p id="938543a2-2a62-4cd7-a39a-a750fa673814" class="">비밀번호 암호화</p><figure id="0030c0e8-d918-4da6-8d2e-32788ce759e4"><a href="http://commons.apache.org/proper/commons-codec/download_codec.cgi" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Codec - Download Apache Commons Codec</div><div class="bookmark-description">We recommend you use a mirror to download our release builds, but you must verify the integrity of the downloaded files using signatures downloaded from our main distribution directories. Recent releases (48 hours) may not yet be available from all the mirrors. You are currently using https://dlcdn.apache.org/.</div></div><div class="bookmark-href"><img src="http://commons.apache.org/favicon.ico" class="icon bookmark-icon"/>http://commons.apache.org/proper/commons-codec/download_codec.cgi</div></div><img src="http://commons.apache.org/proper/commons-codec/images/commons-logo.png" class="bookmark-image"/></a></figure><p id="741179e9-38ec-4fe2-9614-2d291f820eb3" class="">commons-codec-1.15-bin.zip 다운</p><p id="71b971b4-6563-4999-9b7d-1de9fdd428b1" class="">후 압축 풀고 commons-codec-1.15.jar 복사해서 <mark class="highlight-purple"><strong>lib에 붙여 넣기</strong></mark></p><hr id="d5300f97-f635-4051-aeea-b65050f28ec0"/></div></article></body></html>
